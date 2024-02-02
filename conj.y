@@ -1,6 +1,15 @@
 %token END 0
 %token RETURN "return" WHILE "while" IF "if" VAR "var" IDENTIFIER NUMCONST STRINGCONST
 %token OR "||"  AND "&&"  EQ "=="  NE "!="  PP "++"  MM "--"  PL_EQ "+="  MI_EQ "-="
+%left  ','
+%right '?' ':' '=' "+=" "-="
+%left  "||"
+%left  "&&"
+%left  "==" "!="
+%left  '+' '-'
+%left  '*'
+%right '&' "++" "--"
+%left  '(' '['
 %%
 
 library:    functions;
@@ -31,7 +40,7 @@ expr:       NUMCONST
 |           expr '(' expr ')'
 |           expr '='  expr
 |           expr '+'  expr
-|           expr '-'  expr
+|           expr '-'  expr  %prec '+'
 |           expr "+=" expr
 |           expr "-=" expr
 |           expr "||" expr
@@ -40,12 +49,12 @@ expr:       NUMCONST
 |           expr "!=" expr
 |           expr ',' expr
 |           '&' expr
-|           '*' expr
-|           '-' expr
-|           '!' expr
+|           '*' expr        %prec '&'
+|           '-' expr        %prec '&'
+|           '!' expr        %prec '&'
 |           "++" expr
-|           "--" expr
+|           "--" expr       %prec "++"
 |           expr "++"
-|           expr "--"
+|           expr "--"       %prec "++"
 |           expr '?' expr ':' expr;
 %%

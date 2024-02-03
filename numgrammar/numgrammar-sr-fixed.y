@@ -79,7 +79,7 @@ namespace yy {
 parser::token_type yylex(parser::semantic_type* yylval,
                          NumDriver* driver)
 {
-  return driver->yylex(yylval);
+    return driver->yylex(yylval);
 }
 
 void parser::error(const std::string&){}

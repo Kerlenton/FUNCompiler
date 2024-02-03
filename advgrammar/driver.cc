@@ -6,9 +6,9 @@
 int yyFlexLexer::yywrap() { return 1; }
 
 int main() {
-  FlexLexer *lexer = new yyFlexLexer;
-  yy::NumDriver driver(lexer);
-  driver.parse();
-  driver.printout();
-  delete lexer;
+    FlexLexer *lexer = new yyFlexLexer;
+    yy::NumDriver driver(lexer);
+    driver.parse();
+    driver.printout();
+    delete lexer;
 }
